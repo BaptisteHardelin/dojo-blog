@@ -2,7 +2,7 @@ import BlogList from "../components/BlogList";
 import { useState } from "react";
 
 const Home = () => {
-  const [blogs] = useState([
+  const [blogs, setBlogs] = useState([
     {
       title: "My new website",
       body: "lorem ipsum...",
@@ -23,13 +23,14 @@ const Home = () => {
     },
   ]);
 
+  const handleDelete = (id) => {
+    const newBlogs = blogs.filter((blog) => blog.id !== id);
+    setBlogs(newBlogs);
+  };
+
   return (
     <div className="home">
-      <BlogList blogs={blogs} title="All blogs!" />
-      <BlogList
-        blogs={blogs.filter((blog) => blog.author === "mario")}
-        title="Mario's blogs"
-      />
+      <BlogList blogs={blogs} title="All blogs!" handleDelete={handleDelete} />
     </div>
   );
 };
