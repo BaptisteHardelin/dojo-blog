@@ -7,24 +7,22 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      fetch("http://localhost:8000/blogs")
-        .then((res) => {
-          if (!res.ok) {
-            throw Error("Could not fetch the data for that resource");
-          }
-          return res.json();
-        })
-        .then((data) => {
-          setBlogs(data);
-          setIsPending(false);
-          setError(null);
-        })
-        .catch((error) => {
-          setIsPending(false);
-          setError(error.message);
-        });
-    }, 1000);
+    fetch("http://localhost:8000/blogs")
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("Could not fetch the data for that resource");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setBlogs(data);
+        setIsPending(false);
+        setError(null);
+      })
+      .catch((error) => {
+        setIsPending(false);
+        setError(error.message);
+      });
   }, []);
 
   return (
